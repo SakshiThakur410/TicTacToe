@@ -1,5 +1,9 @@
 let boxes = document.querySelectorAll(".box");
 let resetbtn = document.querySelector("#reset");
+const player1ScoreElement = document.getElementById('player1-score');
+const player2ScoreElement = document.getElementById('player2-score');
+let player1Score = 0;
+let player2Score = 0;
 
 let turnO = true;
 const winpatterns = [
@@ -36,8 +40,11 @@ function checkWinner() {
             boxes[a].innerText === boxes[c].innerText
         ) {
             // If there's a winner, disable all boxes
+            
+
+            updateScore(turnO ? 'Player 2' : 'Player 1');
             boxes.forEach((box) => {
-                box.disabled = true;
+            box.disabled = true;
             });
             return;
         }
@@ -47,6 +54,16 @@ function checkWinner() {
         boxes.forEach((box) => {
             box.disabled = true;
         });
+    }
+}
+
+function updateScore(winner) {
+    if (winner === 'Player 1') {
+        player1Score++;
+        player1ScoreElement.textContent = player1Score;
+    } else if (winner === 'Player 2') {
+        player2Score++;
+        player2ScoreElement.textContent = player2Score;
     }
 }
 
